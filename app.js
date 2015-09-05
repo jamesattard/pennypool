@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+<<<<<<< HEAD
 var users = require('./routes/users');
 var create = require('./routes/create');
+=======
+>>>>>>> origin/master
 
 var app = express();
 
@@ -23,9 +26,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var authenticate = function (req, res, next) {
+  var isAuthenticated = true;
+  if (req.session.name == undefined) {
+    isAuthenticated = false;
+  }
+  if (isAuthenticated) {
+    next();
+  }
+  else {
+    res.redirect('/');
+  }
+}
+
 app.use('/', routes);
+<<<<<<< HEAD
 app.use('/users', users);
 app.use('/create', create);
+=======
+>>>>>>> origin/master
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
