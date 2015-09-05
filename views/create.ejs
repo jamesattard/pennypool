@@ -15,7 +15,7 @@
 		  			Create
 		  			<div class="sub header">Make a new group</div>
 		  		</div>
-				<form class="ui large form">
+				<form class="ui large form" method="post" action="create">
 					<div class="inline fields">
 						<label>Bid frequency</label>
 						<div class="field">
@@ -40,9 +40,15 @@
 						</div>
 					</div>
 					<div class="field">
+						<label>Number of Members</label>
+						<input type="number" name="memberCount" placeholder="Number of Members">
+					</div>
+					<!--<div class="field">
 						<label>Member(s) <span style="color:rgba(0,0,0,0.3)">(i.e. number of <span class="iterationsTxt">months</span> of bidding)</span></label>
 						<input type="text" name="member[]" placeholder="Member" class="currentWorkingInput" autocomplete="off">
-					</div>
+					</div>-->
+					<div id="fields"></div>
+					<button type="submit" class="ui green button">Create</button>
 				</form>
 		    </div>
 		</div>
@@ -62,12 +68,19 @@
   				$('input[name="membersCount"]').on("keyup", function(){
   					$('.iterationsNo').html($(this).val());
   				});
-  				$('body').delegate('input[name="member[]"]', "keyup", function() {
-  					if ($.trim($(this).val()) != '' && $(this).hasClass('currentWorkingInput')) {
-  						$(this).parent('.field').append('<input type="text" name="member[]" placeholder="Member" autocomplete="off" class="currentWorkingInput">');
-  						$(this).removeClass('currentWorkingInput');
+  				$('input[name="memberCount"]').on("keyup", function() {
+  					$('#fields').html('');
+  					var n = parseInt($(this).val());
+  					for (var i = 1; i <= n; i++) {
+  						$('#fields').append('<div class="field"><input type="text" name="members[]" placeholder="Member ' + i + '"></div>');
   					}
   				});
+  				// $('body').delegate('input[name="member[]"]', "keyup", function() {
+  				// 	if ($.trim($(this).val()) != '' && $(this).hasClass('currentWorkingInput')) {
+  				// 		$(this).parent('.field').append('<input type="text" name="member[]" placeholder="Member" autocomplete="off" class="currentWorkingInput">');
+  				// 		$(this).removeClass('currentWorkingInput');
+  				// 	}
+  				// });
   			});
   		</script>
 	</body>
