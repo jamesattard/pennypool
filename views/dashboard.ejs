@@ -26,7 +26,7 @@
 				  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
 				  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
 				  					<% if (!groups[i].isMember) { %>
-				  						<td class="center aligned three wide" class="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
+				  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
 				  					<% } else { %>
 				  						<td class="three wide"></td>
 				  					<% } %>
