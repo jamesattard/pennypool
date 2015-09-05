@@ -34,7 +34,7 @@ function authenticate(req, res, username, password) {
 					req.session.firstname = firstname;
 					if (isVerified == 0) {
 						console.log('SUCCESS: Redirecting to homepage');
-						res.redirect('homepage');
+						res.render('dashboard', {title: title});
 						return;
 					}
 					else {
