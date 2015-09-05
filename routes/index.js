@@ -23,4 +23,10 @@ router.get('/login', function(req,res,next) {
 	res.render('regLog', {title: title, type: 'login', message: ''});
 });
 
+router.get('/verify', function(req,res,next) {
+	code = req.query.code;
+	verify.checkCode(code);
+	res.send('success');
+});
+
 module.exports = router;
