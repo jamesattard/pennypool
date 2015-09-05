@@ -13,6 +13,9 @@
 			</div>
 		  	<div class="ui container">
 	  			<% if (type == 'reg') { %>
+		  			<% if (message == "username already exists") { %>
+		            	<p class="error_message">Username already exists. Please try with another username.</p>
+		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Register
 	  				</div>
@@ -32,7 +35,13 @@
 				  					</div>
 				  					<div class="required field">
 			  							<label>Username</label>
-			  							<input type="text" name="uname" placeholder="Username">
+			  							<% if ( message == "username already exists" ) { %>
+										<div class="ui error input">
+			  							<% } else { %>
+			  							<div class="ui input">
+			  							<% } %>
+			  								<input type="text" name="uname" placeholder="Username">
+			  							</div>
 			  						</div>
 			  						<div class="required field">
 			  							<label>Email</label>
@@ -76,6 +85,12 @@
 						</div>
 	  				</div>
 	  			<% } else { %>
+		  			<% if (message == "username does not exist") { %>
+		            	<p class="error_message">Username doesn't exist. Please register first.</p>
+		            <% } %>
+		            <% if (message == "wrong password") { %>
+		            	<p class="error_message">Incorrect password. Please try again.</p>
+		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Login
 	  				</div>
@@ -84,12 +99,12 @@
 							<div class="basic ui segment">
 			  					<form class="ui form">
 			  						<div class="field">
-			  							<label>Email</label>
-			  							<input type="text" name="email" placeholder="Email">
+			  							<label>Username</label>
+			  							<input type="text" name="uname" placeholder="Username">
 			  						</div>
 			  						<div class="field">
 			  							<label>Password</label>
-			  							<input type="password" name="number" placeholder="Password">
+			  							<input type="password" name="pwrd" placeholder="Password">
 			  						</div>
 			  						<button class="large fluid blue ui button" type="submit">Login</button>
 			  					</form>
