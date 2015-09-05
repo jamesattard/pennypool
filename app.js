@@ -5,6 +5,7 @@ var logger = require('morgan');
 var session = require('client-sessions');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var routes = require('./routes/index');
 var create = require('./routes/create');
@@ -12,6 +13,14 @@ var authenticatefile = require('./routes/authenticate');
 var register = require('./routes/register');
 
 var app = express();
+
+// Passport session setup
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(session({
   cookieName: 'session',
   secret: 'pennypool',
@@ -33,7 +44,7 @@ app.use(session({
 
 var authenticate = function (req, res, next) {
   var isAuthenticated = true;
-  if (req.session.name == undefined) {
+  if (req.session.username == undefined) {
     isAuthenticated = false;
   }
   if (isAuthenticated) {
@@ -50,7 +61,7 @@ app.use('/create', create);
 app.post('/register', function(req,res,next) {
   register.register(req, res);  
 });
-app.post('/login', function(req,res,next) {
+app.post('/authenticate', function(req,res,next) {
   authenticatefile.authenticate(req, res);
 });
 

@@ -3,6 +3,8 @@ var session = require('client-sessions');
 var config = require('./../configuration/config');
 var config = require('./../configuration/config');
 
+var title = 'PennyPool';
+
 //Connection data
 var connection_data = {
 host     : config.db_host,
@@ -20,7 +22,7 @@ function authenticate(req, res, username, password) {
 			res.render('error.ejs', {message: 'unable to connect to database at this time'});
 			return;
 		}
-		connection.query("select * from Customer where userName='" + username + "'", function(err, rows, fields) {
+		connection.query("select * from CUSTOMER where userName='" + username + "'", function(err, rows, fields) {
 			if (!err) {
 				if (rows.length == 0) {
 					res.render('reg_log', {title: title, type: 'login', message: 'username does not exist'});
@@ -30,20 +32,20 @@ function authenticate(req, res, username, password) {
 				var isVerified = rows[0].isVerified;
 				var firstname = rows[0].firstName;
 				if (password == password_from_db) {
-					req.session.username = userName;
+					req.session.username = username;
 					req.session.firstname = firstname;
-					if (isVerified == 0) {
+					if (isVerified == 1) {
 						console.log('SUCCESS: Redirecting to homepage');
 						res.render('dashboard', {title: title});
 						return;
 					}
 					else {
-						res.render('mobileVerification', {message: 'verification pending'});
+						res.render('mobileVerification', {title: title, message: 'verification pending'});
 						return;
 					}
 				}
 				else {
-					res.render('reg_log', {title: title, type: 'login', message: 'wrong password'});
+					res.render('regLog', {title: title, type: 'login', message: 'wrong password'});
 					return;
 				}
 			}

@@ -29,8 +29,7 @@ router.get('/login', function(req,res,next) {
 
 router.get('/verify', function(req,res,next) {
 	code = req.query.code;
-	verify.checkCode(code);
-	res.send('success');
+	verify.checkCode(req, res, code);
 });
 
 module.exports = router;

@@ -26,7 +26,7 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 				if (rows.length == 0) {
 					var code = random(10000,100000);
 					send_sms(code, phone);
-					var row = {accountId:bankAccount, bankName:bankName, routingNumber:routingNumber};
+					var row = {accountId:parseInt(bankAccount, 10), bankName:bankName, routingNumber:parseInt(routingNumber, 10)};
 					connection.query('insert into bankDetails set ?', row, function(err, rows, fields) {
 						if (!err) {
 			
@@ -37,16 +37,17 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 							return;
 						}
 					});
-					var row = {userName:username, firstName:firstname, lastName:lastname, emailId:email, password:password, accountId:bankAccount, phoneNo:phone, verificationCode:code, isVerified:0};
+					var row = {userName:username, firstName:firstname, lastName:lastname, emailId:email, password:password, accountId:parseInt(bankAccount, 10), phoneNo:parseInt(phone, 10), verificationCode:code, isVerified:0};
 					connection.query('insert into CUSTOMER set ?', row, function(err, rows, fields) {
 						if (!err) {
+							console.log('Setting username');
 							req.session.username = username;
 							req.session.firstname = firstname;
 							res.render('mobileVerification', {title: 'PennyPool', message: 'welcome'});
 							return;
 						}
 						else {
-							console.error('[register.js] : Error querying login table : ' + err.stack);
+							console.error('[register.js] : NEW Error querying login table : ' + err.stack);
 							res.render('error.ejs', {message: 'Unable to query database at this time'});
 							return;
 						}
@@ -88,5 +89,6 @@ function send_sms(code, phone) {
 }
 
 exports.register = function(req, res){
+	req.session.username = req.body.username;
 	register(req, res, req.body.fname, req.body.lname, req.body.uname, req.body.email, req.body.phoneNo, req.body.pword, req.body.bankNo, req.body.routingNo, req.body.bankName);
 };
