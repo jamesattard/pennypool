@@ -1,8 +1,36 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#index {
+	background-image: url('../images/bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center center;
+	background-color: #444;
+	background-repeat: no-repeat;
+	height: 100%;
 }
 
-a {
-  color: #00B7FF;
+.ui.container {
+	padding-top: 70px;
+}
+
+.ui.container #index-links {
+	margin: 60px auto;
+}
+
+.ui.container #index-link {
+	font-size: 3em;
+	margin: 50px 0;
+	text-align: center;
+}
+
+.ui.container #index-link a {
+	color: rgba(255,255,255,1);
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	letter-spacing: 3px;
+}
+
+.ui.container #index-link a:hover {
+	color:rgba(255,255,255,0.5);
+	letter-spacing: 4.5px;
 }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+	</head>
+	<body>
+		<div class="ui page">
+			<div class="ui top attached borderless menu">
+				<a href="/"><div class="text item"><%= title %></div></a>
+			</div>
+		  	<div class="ui container">
+	  			<% if (type == 'reg') { %>
+	  				<div class="ui centered huge header">
+	  					Register
+	  				</div>
+	  				<div class="ui centered center aligned grid">
+						<div class="fourteen wide column">
+							<div class="basic ui segment">
+			  					<form class="ui form">
+				  					<div class="two fields">
+				  						<div class="field">
+				  							<label>First Name</label>
+				  							<input type="text" name="fname" placeholder="First Name">
+				  						</div>
+				  						<div class="field">
+				  							<label>Last Name</label>
+				  							<input type="text" name="lname" placeholder="Last Name">
+				  						</div>
+				  					</div>
+			  						
+			  						<div class="field">
+			  							<label>Email</label>
+			  							<input type="text" name="email" placeholder="Email">
+			  						</div>
+			  						<div class="field">
+			  							<label>Phone Number</label>
+			  							<input type="text" name="number" placeholder="Phone Number">
+			  						</div>
+			  						<div class="two fields">
+				  						<div class="field">
+				  							<label>Password</label>
+				  							<input type="Password" name="number" placeholder="Password">
+				  						</div>
+				  						<div class="field">
+				  							<label>Confirm Password</label>
+				  							<input type="Password" name="number" placeholder="Confirm Password">
+				  						</div>
+			  						</div>
+			  						<button class="large fluid blue ui button" type="submit">Register</button>
+			  					</form>
+			  					<div class="ui center aligned tiny header">
+			  						<a href="/">Back</a>
+			  					</div>
+			  				</div>
+						</div>
+	  				</div>
+	  			<% } else { %>
+	  				<div class="ui centered huge header">
+	  					Login
+	  				</div>
+	  				<div class="ui centered center aligned grid">
+						<div class="ten wide column">
+							<div class="basic ui segment">
+			  					<form class="ui form">
+			  						<div class="field">
+			  							<label>Email</label>
+			  							<input type="text" name="email" placeholder="Email">
+			  						</div>
+			  						<div class="field">
+			  							<label>Password</label>
+			  							<input type="password" name="number" placeholder="Password">
+			  						</div>
+			  						<button class="large fluid blue ui button" type="submit">Login</button>
+			  					</form>
+			  					<div class="ui center aligned tiny header">
+			  						<a href="/">Back</a>
+			  					</div>
+			  				</div>
+						</div>
+	  				</div>
+	  			<% } %>
+		    </div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.js"></script>
+	</body>
+</html>
