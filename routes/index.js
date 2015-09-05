@@ -5,15 +5,22 @@ var title = "PennyPool";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: title });
+	// if (signed in) 
+	// redirect(dashboard)
+  	// else
+  	res.render('index', { title: title, signedin: false });
+});
+
+router.get('/dashboard', function(req,res,next) {
+	res.render('dashboard', {title: title});
 });
 
 router.get('/register', function(req,res,next) {
-	res.render('reg_log', {title: title, type: 'reg'});
+	res.render('regLog', {title: title, type: 'reg'});
 });
 
 router.get('/login', function(req,res,next) {
-	res.render('reg_log', {title: title, type: 'login'});
+	res.render('regLog', {title: title, type: 'login'});
 });
 
 module.exports = router;
