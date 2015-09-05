@@ -16,7 +16,7 @@ router.get('/dashboard', function(req,res,next) {
 });
 
 router.get('/register', function(req,res,next) {
-	res.render('regLog', {title: title, type: 'reg'});
+	res.render('regLog', {title: title, type: 'reg', message: ''});
 });
 
 router.get('/login', function(req,res,next) {
