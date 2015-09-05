@@ -2,11 +2,14 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('client-sessions');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var create = require('./routes/create');
+var authenticatefile = require('./routes/authenticate');
+var register = require('./routes/register');
 
 var app = express();
 
@@ -21,6 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  cookieName: 'session',
+  secret: 'pennypool',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 
 var authenticate = function (req, res, next) {
   var isAuthenticated = true;
@@ -37,6 +46,13 @@ var authenticate = function (req, res, next) {
 
 app.use('/', routes);
 app.use('/create', create);
+
+app.post('/register', function(req,res,next) {
+  register.register(req, res);  
+});
+app.post('/login', function(req,res,next) {
+  authenticatefile.authenticate(req, res);
+});
 
 
 // catch 404 and forward to error handler
