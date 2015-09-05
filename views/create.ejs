@@ -8,7 +8,7 @@
 	<body>
 		<div class="ui page">
 			<div class="ui top attached borderless menu">
-				<div class="text item"><%= title %></div>
+				<a href="/"><div class="text item"><%= title %></div></a>
 			</div>
 		  	<div class="ui container">
 		  		<div class="ui huge header">
@@ -33,14 +33,14 @@
 					</div>
 					<div class="field">
 						<label><span class="freq_text">Monthly</span> Premium</label>
-						<input type="text" name="premium" placeholder="Premium">
+						<div class="ui labeled input">
+							<div class="ui label">$</div>
+							<input type="text" name="premium" placeholder="Premium">
+							<div class="ui basic label">.00</div>
+						</div>
 					</div>
 					<div class="field">
-						<label>Number of Members <span style="font-style:italic; color:rgba(0,0,0,0.3)">i.e. <span class="iterationsNo">12</span> <span class="iterationsTxt">months</span> of bidding</span></label>
-						<input type="text" name="membersCount" placeholder="Number of Members" value=12>
-					</div>
-					<div class="field">
-						<label>Member(s) <span style="font-style:italic; color:rgba(0,0,0,0.3)">(i.e. <span></span> number of <span class="iterationsTxt"></span>)</span></label>
+						<label>Member(s) <span style="color:rgba(0,0,0,0.3)">(i.e. number of <span class="iterationsTxt">months</span> of bidding)</span></label>
 						<input type="text" name="member[]" placeholder="Member" class="currentWorkingInput" autocomplete="off">
 					</div>
 				</form>
