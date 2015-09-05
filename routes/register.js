@@ -11,7 +11,7 @@ password : config.db_password,
 database : config.db_database
 };
 
-function register(req, res, firstname, lastname, password, phone) {
+function register(req, res, firstname, lastname, username, email, phone, password, bankAccount, routingNumber, bankName) {
 	var connection_pool = mysql.createPool(connection_data);
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
@@ -19,33 +19,33 @@ function register(req, res, firstname, lastname, password, phone) {
 			res.render('errorPage.ejs', {message: 'Unable to connect to database at this time'});
 			return;
 		}
-		connection.query("select * from Customer where email='" + email + "'", function(err, rows, fields) {
+		connection.query("select * from Customer where username='" + username + "'", function(err, rows, fields) {
 			if (!err) {
 				if (rows.length == 0) {
 					var code = random(10000,100000);
 					send_sms(code, phone);
-					var row = {email:email, password:password, firstname:firstname, lastname:lastname, email:email, phone:phone, verified:'false', verification_code:code};
+					var row = {userName:username, firstName:firstname, lastName:lastname, emailId:email, password:password, accountId:bankAccount, phoneNo:phone, verificationCode:code, isVerified:0};
 					connection.query('insert into Customer set ?', row, function(err, rows, fields) {
 						if (!err) {
-							req.session.email = email;
-							req.session.name = firstname;
-							res.render('mobileVerification.ejs', {message: 'welcome', code: code});
+							req.session.username = uname;
+							req.session.firstname = firstname;
+							res.render('mobileVerification', {message: 'welcome'});
 							return;
 						}
 						else {
-							console.error('[Register.js] : Error querying login table : ' + err.stack);
+							console.error('[register.js] : Error querying login table : ' + err.stack);
 							res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
 							return;
 						}
 					});
 				}
 				else {
-					res.render('registerPage.ejs', {message: 'username already exists'});
+					res.render('reg_log', {title: title, type: 'reg', message: 'username already exists'});
 					return;
 				}
 			}
 			else {
-				res.render('registerPage.ejs', {message: 'something went wrong'});
+				res.render('errorPage.ejs', {message: 'something went wrong'});
 				return;
 			}
 		});
@@ -58,21 +58,21 @@ function random(low, high) {
 }
 
 function send_sms(code, phone) {
- 	var client = new twilio.RestClient('AC997603cf5760391f8e39ce90192a3acf', '628746f7ce96f53fa50bc232d5e59d62');
+ 	var client = new twilio.RestClient(config.twilio_sid, config.twilio_token);
  	client.sms.messages.create({
     	to:'+1'+phone,
-    	from:'3017106565',
-    	body:'Verification Code for SidebySide: ' + code + '. Please enter this in the website to verify your account'
+    	from:config.twilio_phone,
+    	body:'Verification Code for PennyPool: ' + code + '. Please enter this in the website to verify your account'
 	}, function(error, message) {
     if (!error) {
     	
     } 
     else {
-        console.log('[Register.js] : Twilio Error');
+        console.log('[register.js] : Twilio Error');
     }
 	});
 }
 
 exports.register = function(req, res){
-	register(req, res, req.body.email, req.body.firstname, req.body.lastname, req.body.password, req.body.phone);
+	register(req, res, req.body.fname, req.body.lname, req.body.uname, req.body.email, req.body.phone, req.body.pword, req.body.bankNo, req.body.routingNo, req.body.bankName);
 };
