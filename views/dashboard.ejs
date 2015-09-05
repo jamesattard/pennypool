@@ -28,6 +28,7 @@
 			  			</tbody>
 		  			</table>
 		  			<div id="hidden" class="ui bottom attached segment" style="display:none">
+		  				<% if (2+2==5) { %>
 	  					<div class="ui centered small header"> You have/haven't claimed your bid </div>
 						<table class="ui two column celled center aligned unstackable table">
 							<thead>
@@ -43,23 +44,27 @@
 								</tr>
 							</tbody>
 						</table>
-						<% // if bid not made yet && user not in <already claimed> list %>
-						<div class="ui basic segment">
-							<form class="ui form">
-								<div class="field">
-									<label>Make bid</label>
-									<div class="ui action input">
-										<input type="text" placeholder="Value">
-										<div class="ui basic green animated button">
-											<div class="visible content">Go</div>
-											<div class="hidden content">
-												<i class="right angle icon"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
+						<% } else { %>
+						<div class="ui centered small header"> You have/haven't claimed your bid </div>
+						<table class="ui two column celled center aligned unstackable table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Membership Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{user.name}}</td>
+									<td class="positive">{{user.status}}</td>
+								</tr>
+								<tr>
+									<td>{{user.name}}</td>
+									<td class="negative">{{user.status}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<% } %>
 		  			</div>
 		  		</div>
 		    </div>
