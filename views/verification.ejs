@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side by Side</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.css">
+</head>
+<body>
+	<div class="ui page">
+		<div class="ui top attached borderless menu">
+			<div class="text item"><%= title %></div>
+		</div>
+	  	<div class="ui container">
+	  		<div class="ui huge header">
+	  			Verify your account
+	  		</div>
+			<% if (message == "welcome") { %>
+    			<p>A verification code has been sent to you mobile and to your email. You can also scan the QR code below to obtain your code. Please enter the code below to verify your account.</p>
+    		<% } else if (message == "something went wrong") { %>
+				<p>Something went wrong. Try again</p>
+				<% } else if (message == "verification pending") { %>
+				<p>You need to verify your account before you can proceed. Please enter the verification code</p>
+				<% } else if (message == "wrong code") { %>
+				<p>The code you entered is wrong. Try again</p>
+				<% } %>
+			<form action="mobileVerification" method="get" class="ui form">
+				<div class="field">
+					<input type="text" id="code" name="code" placeholder="Verification Code">
+				</div>
+				<button class="ui button">Submit</button>
+			</form>
+	    </div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.js"></script>
+</body>
+</html>
