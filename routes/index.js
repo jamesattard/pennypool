@@ -20,7 +20,7 @@ router.get('/register', function(req,res,next) {
 });
 
 router.get('/login', function(req,res,next) {
-	res.render('regLog', {title: title, type: 'login'});
+	res.render('regLog', {title: title, type: 'login', message: ''});
 });
 
 module.exports = router;
