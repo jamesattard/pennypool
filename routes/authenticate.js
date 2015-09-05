@@ -17,7 +17,7 @@ function authenticate(req, res, username, password) {
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
 			console.error('[authentication.js] : Error connecting to database : ' + err.stack);
-			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+			res.render('error.ejs', {message: 'unable to connect to database at this time'});
 			return;
 		}
 		connection.query("select * from Customer where userName='" + username + "'", function(err, rows, fields) {
@@ -49,7 +49,7 @@ function authenticate(req, res, username, password) {
 			}
 			else {
 				console.error('[authentication.js] : Error querying Customers table : ' + err.stack);
-				res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+				res.render('error.ejs', {message: 'Unable to query database at this time'});
 				return;
 			}
 		});

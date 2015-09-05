@@ -18,7 +18,7 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
 			console.error('[register.js] : Error connecting to database : ' + err.stack);
-			res.render('errorPage.ejs', {message: 'Unable to connect to database at this time'});
+			res.render('error.ejs', {message: 'Unable to connect to database at this time'});
 			return;
 		}
 		connection.query("select * from CUSTOMER where username='" + username + "'", function(err, rows, fields) {
@@ -33,7 +33,7 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 						}
 						else {
 							console.error('[register.js] : Error querying login table : ' + err.stack);
-							res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+							res.render('error.ejs', {message: 'Unable to query database at this time'});
 							return;
 						}
 					});
@@ -47,7 +47,7 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 						}
 						else {
 							console.error('[register.js] : Error querying login table : ' + err.stack);
-							res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+							res.render('error.ejs', {message: 'Unable to query database at this time'});
 							return;
 						}
 					});
@@ -59,7 +59,7 @@ function register(req, res, firstname, lastname, username, email, phone, passwor
 			}
 			else {
 				console.log(err);
-				res.render('errorPage.ejs', {message: 'something went wrong'});
+				res.render('error.ejs', {message: 'something went wrong'});
 				return;
 			}
 		});
