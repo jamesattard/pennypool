@@ -48,16 +48,16 @@ function create(req, res, freq, memberCount, premiumVal, members) {
 				connection.query("INSERT INTO `CustomerGroup` SET ?", row, function(err, rows, fields) {
 					if (err) {
 						console.error('[create.js] : Error inserting group info : ' + err.stack);
-						res.render('error', 'Unable to insert group info');
+						res.render('error', {message:'Unable to insert group info'});
 						return;
 					} else {
 						for (var i = 0; i < members.length; i++) {
 							memberUsername = members[i];
 							var row = {userName: memberUsername, groupId: groupId, status: "pending"};
-							connection.query("INSERT INTO `customerBelongsToGroup` SET ?", row, function(err,rows,fields) {
+							connection.query("INSERT INTO `customerBelongsToGroup` SET ?", row, function(err, rows, fields) {
 								if (err) {
 									console.error('[create.js] : Error inserting member : ' + err.stack);
-									res.render('error', 'Unable to insert member');
+									res.render('error', {message:'Unable to insert member'});
 									return;
 								} else {
 									res.render('index', {title: title});
