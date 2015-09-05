@@ -8,7 +8,7 @@
 	<body>
 		<div class="ui page">
 			<div class="ui top attached borderless menu">
-				<div class="text item"><%= title %></div>
+				<a href="/"><div class="text item"><%= title %></div></a>
 			</div>
 		  	<div class="ui container grid" style="padding-top:30px;">
 		  		<div class="row">
@@ -38,11 +38,28 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>{{iteration.id}} -- {{iteration.value}} -- {{iteration.user.name}}</td>
+									<td>{{iteration._id}} -- {{iteration.value}} -- {{iteration.user.name}}</td>
 									<td>{{user.name}}</td>
 								</tr>
 							</tbody>
 						</table>
+						<% // if bid not made yet && user not in <already claimed> list %>
+						<div class="ui basic segment">
+							<form class="ui form">
+								<div class="field">
+									<label>Make bid</label>
+									<div class="ui action input">
+										<input type="text" placeholder="Value">
+										<div class="ui basic green animated button">
+											<div class="visible content">Go</div>
+											<div class="hidden content">
+												<i class="right angle icon"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
 		  			</div>
 		  		</div>
 		    </div>
