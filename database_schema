@@ -1,0 +1,50 @@
+CREATE TABLE CUSTOMER(
+userName varchar(30), 
+firstName char(30) NOT NULL,
+lastName char(30) NOT NULL,
+emailId varchar(70) UNIQUE,
+password varchar(40) NOT NULL,
+accountId varchar(40),
+phoneNo numeric(10),
+verificationCode varchar(30) UNIQUE,
+isVerified BINARY(2),
+PRIMARY KEY(userName),
+FOREIGN KEY(accountId) -references bankDetails);
+
+CREATE TABLE GROUP(
+groupId varchar(30),
+duration int(2),
+noOfCustomers int(2),
+subscriptionAmount numeric(10,4),
+PRIMARY KEY(groupId));
+
+CREATE TABLE customerBelongsToGroup(
+userName varchar(30),
+groupId varchar(30),
+PRIMARY KEY(userName,groupId),
+FOREIGN KEY(userName) references CUSTOMER(userName),
+FOREIGN KEY(groupId) references GROUP(groupId));
+
+CREATE TABLE bankDetails( 
+accountId varchar(40),
+bankName char(40) NOT NULL,
+routingNumber varchar(40) NOT NULL,
+PRIMARY KEY(accountId));
+
+CREATE TABLE bid(
+groupId varchar(30),
+userName varchar(30),
+timestamp varchar(50),
+bidValue numeric(10,4),
+iteration numeric(3),
+PRIMARY KEY(groupId,userName,iteration),
+FOREIGN KEY(groupId) references GROUP(groupId),
+FOREIGN KEY(userName) references CUSTOMER(userName));
+
+CREATE TABLE GroupRequest(
+groupId varchar(30),
+userName varchar(30),
+status varchar(20),
+PRIMARY KEY(groupId,userName),
+FOREIGN KEY(groupId) references GROUP(groupId),
+FOREIGN KEY(userName) references CUSTOMER(userName));
