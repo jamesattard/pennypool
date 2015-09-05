@@ -38,7 +38,6 @@ function create(req, res, freq, memberCount, premiumVal, members) {
 				return;
 			} else {
 				var groupId = parseInt(rows[0].maxGroupId, 10) + 1;
-				groupId += "";
 				var duration;
 				if (freq == 'monthly') 
 					duration = 31;
