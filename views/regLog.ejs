@@ -13,41 +13,68 @@
 			</div>
 		  	<div class="ui container">
 	  			<% if (type == 'reg') { %>
+		  			<% if (message == "username already exists") { %>
+		            	<div class="ui warning message">Username already exists. Please try with another username.</div>
+		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Register
 	  				</div>
 	  				<div class="ui centered center aligned grid">
 						<div class="fourteen wide column">
 							<div class="basic ui segment">
-			  					<form class="ui form">
+			  					<form class="ui form" action="register" method="post">
 				  					<div class="two fields">
-				  						<div class="field">
+				  						<div class="required field">
 				  							<label>First Name</label>
 				  							<input type="text" name="fname" placeholder="First Name">
 				  						</div>
-				  						<div class="field">
+				  						<div class="required field">
 				  							<label>Last Name</label>
 				  							<input type="text" name="lname" placeholder="Last Name">
 				  						</div>
 				  					</div>
-			  						
-			  						<div class="field">
+				  					<div class="required field">
+			  							<label>Username</label>
+			  							<% if ( message == "username already exists" ) { %>
+										<div class="ui error input">
+			  							<% } else { %>
+			  							<div class="ui input">
+			  							<% } %>
+			  								<input type="text" name="uname" placeholder="Username">
+			  							</div>
+			  						</div>
+			  						<div class="required field">
 			  							<label>Email</label>
 			  							<input type="text" name="email" placeholder="Email">
 			  						</div>
-			  						<div class="field">
+			  						<div class="required field">
 			  							<label>Phone Number</label>
-			  							<input type="text" name="number" placeholder="Phone Number">
+			  							<input type="text" name="phoneNo" placeholder="Phone Number">
 			  						</div>
 			  						<div class="two fields">
-				  						<div class="field">
+				  						<div class="required field">
 				  							<label>Password</label>
-				  							<input type="Password" name="number" placeholder="Password">
+				  							<input type="Password" name="pword" placeholder="Password">
 				  						</div>
-				  						<div class="field">
+				  						<div class="required field">
 				  							<label>Confirm Password</label>
-				  							<input type="Password" name="number" placeholder="Confirm Password">
+				  							<input type="Password" name="pwordConfirm" placeholder="Confirm Password">
 				  						</div>
+			  						</div>
+			  						<div class="divider"><i>Bank info</i></div>
+			  						<div class="three fields">
+			  							<div class="required field">
+			  								<label>Bank Number</label>
+			  								<input type="text" name="bankNo" placeholder="Bank Number">
+			  							</div>
+			  							<div class="required field">
+			  								<label>Routing Number</label>
+			  								<input type="text" name="routingNo" placeholder="Routing Number">
+			  							</div>
+			  							<div class="required field">
+			  								<label>Bank Name</label>
+			  								<input type="text" name="bankName" placeholder="Bank Name">
+			  							</div>
 			  						</div>
 			  						<button class="large fluid blue ui button" type="submit">Register</button>
 			  					</form>
@@ -58,6 +85,12 @@
 						</div>
 	  				</div>
 	  			<% } else { %>
+		  			<% if (message == "username does not exist") { %>
+		            	<div class="ui warning message">Username doesn't exist. Please register first.</div>
+		            <% } %>
+		            <% if (message == "wrong password") { %>
+		            	<div class="ui warning message">Incorrect password. Please try again.</div>
+		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Login
 	  				</div>
@@ -66,12 +99,12 @@
 							<div class="basic ui segment">
 			  					<form class="ui form">
 			  						<div class="field">
-			  							<label>Email</label>
-			  							<input type="text" name="email" placeholder="Email">
+			  							<label>Username</label>
+			  							<input type="text" name="uname" placeholder="Username">
 			  						</div>
 			  						<div class="field">
 			  							<label>Password</label>
-			  							<input type="password" name="number" placeholder="Password">
+			  							<input type="password" name="pwrd" placeholder="Password">
 			  						</div>
 			  						<button class="large fluid blue ui button" type="submit">Login</button>
 			  					</form>
