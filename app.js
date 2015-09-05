@@ -6,11 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-<<<<<<< HEAD
 var users = require('./routes/users');
 var create = require('./routes/create');
-=======
->>>>>>> origin/master
 
 var app = express();
 
@@ -40,11 +37,9 @@ var authenticate = function (req, res, next) {
 }
 
 app.use('/', routes);
-<<<<<<< HEAD
 app.use('/users', users);
 app.use('/create', create);
-=======
->>>>>>> origin/master
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
