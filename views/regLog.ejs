@@ -14,7 +14,7 @@
 		  	<div class="ui container">
 	  			<% if (type == 'reg') { %>
 		  			<% if (message == "username already exists") { %>
-		            	<p class="error_message">Username already exists. Please try with another username.</p>
+		            	<div class="ui warning message">Username already exists. Please try with another username.</div>
 		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Register
@@ -86,10 +86,10 @@
 	  				</div>
 	  			<% } else { %>
 		  			<% if (message == "username does not exist") { %>
-		            	<p class="error_message">Username doesn't exist. Please register first.</p>
+		            	<div class="ui warning message">Username doesn't exist. Please register first.</div>
 		            <% } %>
 		            <% if (message == "wrong password") { %>
-		            	<p class="error_message">Incorrect password. Please try again.</p>
+		            	<div class="ui warning message">Incorrect password. Please try again.</div>
 		            <% } %>
 	  				<div class="ui centered huge header">
 	  					Login
