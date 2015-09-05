@@ -11,7 +11,7 @@ isVerified BINARY(2),
 PRIMARY KEY(userName),
 FOREIGN KEY(accountId) -references bankDetails);
 
-CREATE TABLE GROUP(
+CREATE TABLE CustomerGroup(
 groupId varchar(30),
 duration int(2),
 noOfCustomers int(2),
