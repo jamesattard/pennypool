@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
 	if ( JSON.stringify(req.session) === '{}' || req.session.firstname == null ) {
 		res.render('index', {title: title, signedin: false});
 	} else {
-		res.render('dashboard', {title: title, user_name: req.session.firstname});
+		res.render('dashboard', { title: title, user_name: req.session.firstname });
 	}
 });
 
 router.get('/dashboard', function(req,res,next) {
-	res.render('dashboard', {title: title, user_name: req.session.firstname});
+	res.render('dashboard', { title: title, user_name: req.session.firstname });
 });
 
 router.get('/logout', function(req,res,next) {
@@ -46,52 +46,75 @@ router.get('/verify', function(req,res,next) {
 router.get('/db2', function(req,res,next) {
 	res.render('dashboard', { title : title, user_name: req.session.firstname, groups: 
 		[{
-			"groupId": 5,
-			"memberCount": 81,
-			"premium": 150,
-			"freq": 'monthly',
-			"isMember": false ,
+			"groupId": 1001 ,
+			"memberCount": 4,
+			"premium": 100 ,
+			"freq": "monthly",
+			"isMember": false,
 			"status": [
 				{
-					"name": "abc",
+					"name":"kaushik" ,
 					"member": true
 				},
 				{
-					"name": "def",
-					"member": false
+					"name": "shashank",
+					"member": true
 				},
 				{
-					"name": "xyz",
+					"name": "parul",
 					"member": true
 				},
 			]
-		}, {
-			"groupId": 18,
-			"memberCount": 5 ,
-			"premium": 15,
-			"freq": 'weekly',
+		},
+		{
+			"groupId": 1002,
+			"memberCount": 7,
+			"premium": 150,
+			"freq": "monthly",
 			"isMember": true,
 			"info": {
 				"iterations": [
 					{
-						"iteration": 1,
-						"winner": 'abc',
-						"amount": 250
+						"iteration":1,
+						"winner":"Aakriti",
+						"amount":700
 					},
 					{
-						"iteration": 2,
-						"winner": 'abcd',
-						"amount": 180
+						"iteration":2,
+						"winner": "shashank",
+						"amount": 880
 					}
 				],
-				"pendingWinners":['def', 'xyz', 'kashav']
+				"pendingWinners":["kaushik","parul","anudeep","saga","shipra"]
 			}
 		}]
 	});
 });
 
 router.get('/lb', function(req,res,next) {
-	res.render('liveBid', { title: title, group: {}});
+	res.render('liveBid', { title: title, group: {
+		"groupId":1001,
+		"iteration":1,
+		"currentLeaderName": "Kaushik",
+		"currentLeaderAmount": 360,
+		"bidHistory": [
+			{
+				"username":"Keshav",
+				"amount": 366,
+				"timestamp": "2015-09-05 10:20:55" 
+			},
+			{
+				"username":"Shashank",
+				"amount":370,
+				"timestamp":"2015-09-05 10:15:30"
+			},
+			{
+				"username":"Parul",
+				"amount":375,
+				"timestamp":"2015-09-05 10:00:00"
+			}
+		]
+	}});
 });
 
 module.exports = router;

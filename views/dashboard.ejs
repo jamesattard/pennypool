@@ -20,22 +20,22 @@
 		  				<a class="green ui button" href="create">Create</a>
 		  			</div>
 		  			<% if (typeof groups !== 'undefined') { %>
-				  			<table class="ui selectable unstackable top attached table" id="group-list-table">
-				  				<tbody>
-				  					<% for (var i = 0; i < groups.length; i++) { %>
-						  				<tr>
-						  					<td class="five wide">Group <%= groups[i].groupId %></td>
-						  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
-						  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
-						  					<% if (!groups[i].isMember) { %>
-						  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
-						  					<% } else { %>
-						  						<td class="three wide"></td>
-						  					<% } %>
-						  				</tr>
-						  			<% } %>
-					  			</tbody>
-				  			</table>
+			  			<table class="ui selectable unstackable top attached table" id="group-list-table">
+			  				<tbody>
+			  					<% for (var i = 0; i < groups.length; i++) { %>
+					  				<tr>
+					  					<td class="five wide">Group <%= groups[i].groupId %></td>
+					  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
+					  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
+					  					<% if (!groups[i].isMember) { %>
+					  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
+					  					<% } else { %>
+					  						<td class="center aligned three wide"><i class="large black check icon"></i></td>
+					  					<% } %>
+					  				</tr>
+					  			<% } %>
+				  			</tbody>
+			  			</table>
 					<% } else { %>
 						<div class="ui massive header">
 							You're part of no groups, <i>yet</i>. Get started above.
