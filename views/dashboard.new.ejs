@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.css">
+	</head>
+	<body>
+		<div class="ui page">
+			<div class="ui top attached borderless menu">
+				<a href="/"><div class="text item"><%= title %></div></a>
+				<a href="/logout"><div class="right link text item">Logout</div></a>
+			</div>
+		  	<div class="ui container grid" style="padding-top:30px;">
+		  		<div class="row">
+		  			<div class="eight wide column" style="font-size:1.3em"> 
+		  				Signed in as <b><%= user_name %></b>.
+		  			</div>
+		  			<div class="right aligned eight wide column">
+		  				<a class="green ui button" href="create">Create</a>
+		  			</div>
+		  			<% if (typeof groups !== 'undefined') { %>
+			  			<table class="ui selectable unstackable top attached table" id="group-list-table">
+			  				<tbody>
+			  					<% for (var i = 0; i < groups.length; i++) { %>
+					  				<tr>
+					  					<td class="five wide">Group <%= groups[i].groupId %></td>
+					  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
+					  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
+					  					<% if (!groups[i].isMember) { %>
+					  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
+					  					<% } else { %>
+					  						<td class="center aligned three wide"><i class="large black check icon"></i></td>
+					  					<% } %>
+					  				</tr>
+					  			<% } %>
+				  			</tbody>
+			  			</table>
+					<% } else { %>
+						<div class="ui massive header">
+							You're part of no groups, <i>yet</i>. Get started above.
+						</div>
+					<% } %>
+		  		</div>
+		    </div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  		<script>
+	  		$('.ui.selectable.unstackable.top.attached.table').on("click", function() {
+	  			$(this).next('#hidden').slideToggle(300);
+	  		});
+  		</script>
+	</body>
+</html>
