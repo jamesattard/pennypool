@@ -24,7 +24,6 @@ router.post('/', function(req,res) {
 });
 
 function create(req, res, freq, memberCount, premiumVal, members) {
-	console.log(members);
 	var connection_pool = mysql.createPool(connection_data);
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
