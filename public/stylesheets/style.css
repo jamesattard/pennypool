@@ -13,13 +13,13 @@
 }
 
 .ui.container #index-links {
-	margin: 60px auto;
+	margin: 125px auto;
+	text-align: center;
 }
 
 .ui.container #index-link {
-	font-size: 3em;
-	margin: 50px 0;
-	text-align: center;
+	font-size: 2.5em;
+	display: inline-block;
 }
 
 .ui.container #index-link a {
@@ -28,6 +28,9 @@
 	-o-transition: letter-spacing 0.3s ease-in-out;
 	transition: letter-spacing 0.3s ease-in-out;
 	letter-spacing: 3px;
+	background-color: rgba(1,1,1,0.4);
+	padding: 20px;
+	border-radius: 10px;
 }
 
 .ui.container #index-link a:hover {
@@ -37,4 +40,27 @@
 
 #group-list-table tr:hover {
 	cursor: pointer;
+}
+
+.main_title {
+	color:rgba(255,255,255,0.4);
+	font-size: 3em;
+	letter-spacing: 0.6px;
+	line-height: 80px;
+}
+
+#notmain_title {
+	font-size: 1.2em;
+	margin: 5px 0; 
+}
+
+div.ui.top.attached.borderless.menu {
+	background-color: #8e44ad;
+	border-color: #ccc;
+}
+
+div.ui.top.attached.borderless.menu .text.item {
+	color: white;
+	font-weight: 900;
+	margin: 0 auto;
 }

@@ -36,4 +36,8 @@ router.get('/db2', function(req,res,next) {
 	res.render('dashboard', { title : title, groups: []});
 });
 
+router.get('/lb', function(req,res,next) {
+	res.render('liveBid', { title: title, group: {}});
+});
+
 module.exports = router;
