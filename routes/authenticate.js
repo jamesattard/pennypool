@@ -29,7 +29,7 @@ function authenticate(req, res, username, password) {
 					return;
 				}
 				var password_from_db = rows[0].password;
-				var isVerified = rows[0].isVerified;
+				var isVerified = parseInt(rows[0].isVerified, 10);
 				var firstname = rows[0].firstName;
 				if (password == password_from_db) {
 					req.session.username = username;
