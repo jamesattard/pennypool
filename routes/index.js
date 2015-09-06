@@ -8,15 +8,15 @@ var title = "PennyPool";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	if ( req.session.username == 'undefined' ) {
-		res.render('dashboard', {title: title});
+	if ( req.session.username !== 'undefined' ) {
+		res.render('dashboard', {title: title, user_name: req.session.firstname});
 	} else {
 		res.render('index', {title: title, signedin: false});
 	}
 });
 
 router.get('/dashboard', function(req,res,next) {
-	res.render('dashboard', {title: title});
+	res.render('dashboard', {title: title, user_name: req.session.firstname});
 });
 
 router.get('/register', function(req,res,next) {
@@ -33,7 +33,7 @@ router.get('/verify', function(req,res,next) {
 });
 
 router.get('/db2', function(req,res,next) {
-	res.render('dashboard', { title : title, groups: []});
+	res.render('dashboard', { title : title, groups: [], user_name: req.session.firstname});
 });
 
 router.get('/lb', function(req,res,next) {

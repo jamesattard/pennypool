@@ -13,7 +13,7 @@
 		  	<div class="ui container grid" style="padding-top:30px;">
 		  		<div class="row">
 		  			<div class="eight wide column" style="font-size:1.3em"> 
-		  				Signed in as <b>{{user.name}}</b>.
+		  				Signed in as <b><%= user_name %></b>.
 		  			</div>
 		  			<div class="right aligned eight wide column">
 		  				<a class="green ui button" href="create">Create</a>
@@ -84,7 +84,7 @@
 						<% } %>
 					<% } else { %>
 						<div class="ui massive header">
-							You're part of no groups, yet. Get started above.
+							You're part of no groups, <i>yet</i>. Get started above.
 						</div>
 					<% } %>
 		  		</div>
