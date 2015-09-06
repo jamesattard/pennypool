@@ -59,7 +59,7 @@ function create(req, res, freq, memberCount, premiumVal, members) {
 									res.render('error', {message:'Unable to insert member'});
 									return;
 								} else {
-									res.render('index', {title: title});
+									res.redirect('/');
 								}
 							});
 						}

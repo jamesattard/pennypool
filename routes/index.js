@@ -8,7 +8,6 @@ var title = "PennyPool";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log(req.session);
 	if ( JSON.stringify(req.session) === '{}' || req.session.firstname == null ) {
 		res.render('index', {title: title, signedin: false});
 	} else {
@@ -45,7 +44,50 @@ router.get('/verify', function(req,res,next) {
 });
 
 router.get('/db2', function(req,res,next) {
-	res.render('dashboard', { title : title, groups: [], user_name: req.session.firstname});
+	res.render('dashboard', { title : title, user_name: req.session.firstname, groups: 
+		[{
+			"groupId": 5,
+			"memberCount": 81,
+			"premium": 150,
+			"freq": 'monthly',
+			"isMember": false ,
+			"status": [
+				{
+					"name": "abc",
+					"member": true
+				},
+				{
+					"name": "def",
+					"member": false
+				},
+				{
+					"name": "xyz",
+					"member": true
+				},
+			]
+		}, {
+			"groupId": 18,
+			"memberCount": 5 ,
+			"premium": 15,
+			"freq": 'weekly',
+			"isMember": true,
+			"info": {
+				"iterations": [
+					{
+						"iteration": 1,
+						"winner": 'abc',
+						"amount": 250
+					},
+					{
+						"iteration": 2,
+						"winner": 'abcd',
+						"amount": 180
+					}
+				],
+				"pendingWinners":['def', 'xyz', 'kashav']
+			}
+		}]
+	});
 });
 
 router.get('/lb', function(req,res,next) {
