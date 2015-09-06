@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.css">
+	</head>
+	<body>
+		<div class="ui page">
+			<div class="ui top attached borderless menu">
+				<a href="/"><div class="header item"><%= title %></div></a>
+				<a href="/group"><div class="text link item">Return</div></a>
+				<div class="right text link item">Logout</div>
+			</div>
+		  	<div class="ui container">
+		  		<div class="ui center aligned header" style="color:rgba(0,0,0,0.5);letter-spacing:3px">
+					Bidding <i>live</i> for <span style="border-bottom:1px dashed #555">group <%= group.groupId %></span> on <span style="border-bottom:1px dashed #555">cycle <%= group.iteration %></span>.
+		  		</div>
+		  		<div class="ui center aligned huge header" style="margin:30px auto">Leading Bid: <%= group.currentLeaderName %> at $<%= group.currentLeaderAmount %></div>
+		  		<div class="ui divider" style="margin:20px auto"></div>
+		  		<div><i>Bidding history</i></div>
+		  		<div class="ui basic segment">
+		  			<table class="ui three column unstackable table">
+		  				<thead>
+			  				<tr>
+			  					<th>Name</th>
+			  					<th>Amount</th>
+			  					<th>Time</th>
+			  				</tr>
+		  				</thead>
+		  				<tbody>
+		  					<% for (var i = 0; i < group.bidHistory.length; i++) { %>
+								<tr>
+									<td><%= group.bidHistory[i].username %></td>
+									<td>$<%= group.bidHistory[i].amount %></td>
+									<td><%= group.bidHistory[i].timestamp %></td>
+								</tr>
+			  				<% } %>
+		  				</tbody>
+		  			</table>
+		  		</div>
+		  		<div class="form">
+		  			<div class="field">
+		  				<label>Make a bid!</label>
+		  				<div class="action input">
+		  					<input type="text" placeholder="BID">
+		  					<button class="ui green button">Make Bid</button>
+		  				</div>
+		  			</div>
+		  		</div>
+		    </div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.3/semantic.min.js"></script>
+	</body>
+</html>

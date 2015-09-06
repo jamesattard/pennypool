@@ -32,4 +32,8 @@ router.get('/verify', function(req,res,next) {
 	verify.checkCode(req, res, code);
 });
 
+router.get('/db2', function(req,res,next) {
+	res.render('dashboard', { title : title, groups: []});
+});
+
 module.exports = router;
