@@ -8,10 +8,11 @@ var title = "PennyPool";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	if ( req.session.username !== 'undefined' ) {
-		res.render('dashboard', {title: title, user_name: req.session.firstname});
-	} else {
+	console.log(req.session);
+	if ( JSON.stringify(req.session) === '{}' || req.session.firstname == null ) {
 		res.render('index', {title: title, signedin: false});
+	} else {
+		res.render('dashboard', {title: title, user_name: req.session.firstname});
 	}
 });
 
@@ -19,12 +20,23 @@ router.get('/dashboard', function(req,res,next) {
 	res.render('dashboard', {title: title, user_name: req.session.firstname});
 });
 
+router.get('/logout', function(req,res,next) {
+	delete req.session.username; delete req.session.firstname;
+	res.redirect('/');
+});
+
 router.get('/register', function(req,res,next) {
-	res.render('regLog', {title: title, type: 'reg', message: ''});
+	if ( JSON.stringify(req.session) !== '{}' )
+		res.redirect('/');
+	else
+		res.render('regLog', {title: title, type: 'reg', message: ''});
 });
 
 router.get('/login', function(req,res,next) {
-	res.render('regLog', {title: title, type: 'login', message: ''});
+	if ( JSON.stringify(req.session) !== '{}' )
+		res.redirect('/');
+	else
+		res.render('regLog', {title: title, type: 'login', message: ''});
 });
 
 router.get('/verify', function(req,res,next) {
