@@ -18,66 +18,73 @@
 		  			<div class="right aligned eight wide column">
 		  				<a class="green ui button" href="create">Create</a>
 		  			</div>
-		  			<% for (var i = 0; i < groups.length; i++) { %>
-			  			<table class="ui selectable unstackable top attached table" id="group-list-table">
-			  				<tbody>
-				  				<tr>
-				  					<td class="five wide">Group <%= groups[i].groupId %></td>
-				  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
-				  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
-				  					<% if (!groups[i].isMember) { %>
-				  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
-				  					<% } else { %>
-				  						<td class="three wide"></td>
-				  					<% } %>
-				  				</tr>
-				  			</tbody>
-			  			</table>
-			  			<div id="hidden" class="ui bottom attached segment" style="display:none">
-				  			<% if (groups[i].isMember) { %>
-								<div class="ui centered small header">
-									You have/haven't claimed your bid yet. 
-								</div>
-								<table class="ui two column celled center aligned unstackable table">
-									<thead>
-										<tr>
-											<th>Already Claimed</th>
-											<th>Claim Pending</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% var counter = (groups[i].info.pendingWinners.length > groups[i].info.iterations.length) ? groups[i].info.pendingWinners.length : groups[i].info.iterations.length; %>
-										<% for (var j = 0; j < counter; j++) { %>
+		  			<% if (typeof groups !== 'undefined') { %>
+			  			<% for (var i = 0; i < groups.length; i++) { %>
+				  			<table class="ui selectable unstackable top attached table" id="group-list-table">
+				  				<tbody>
+					  				<tr>
+					  					<td class="five wide">Group <%= groups[i].groupId %></td>
+					  					<td class="four wide"><%= groups[i].memberCount %> Member(s)</td>
+					  					<td class="four wide">$<%= groups[i].premium %> / <%= groups[i].freq %></td>
+					  					<% if (!groups[i].isMember) { %>
+					  						<td class="center aligned three wide" value="<%= groups[i].groupId %>"><i class="large green check link icon"></i> <i class="large red close link icon"></i></td>
+					  					<% } else { %>
+					  						<td class="three wide"></td>
+					  					<% } %>
+					  				</tr>
+					  			</tbody>
+				  			</table>
+				  			<div id="hidden" class="ui bottom attached segment" style="display:none">
+					  			<% if (groups[i].isMember) { %>
+									<div class="ui centered small header">
+										You have/haven't claimed your bid yet. 
+									</div>
+									<table class="ui two column celled center aligned unstackable table">
+										<thead>
 											<tr>
-												<td><%= groups[i].freq %> <%= groups[i].info.iterations[j].iteration %> - $<%=  groups[i].info.iterations[j].amount %> - <%=  groups[i].info.iterations[j].winner %></td>
-												<td><%= groups[i].info.pendingWinners[j] %></td>
+												<th>Already Claimed</th>
+												<th>Claim Pending</th>
 											</tr>
-										<% } %>
-									</tbody>
-								</table>
-				  			<% } else { %>
-								<div class="ui centered small header"> The cycle will start after everyone accepts the invitation. </div>
-								<table class="ui two column celled center aligned unstackable table">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Membership Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% for ( var j = 0; j < groups[i].status.length; j++ ) { %>
+										</thead>
+										<tbody>
+											<% var counter = (groups[i].info.pendingWinners.length > groups[i].info.iterations.length) ? groups[i].info.pendingWinners.length : groups[i].info.iterations.length; %>
+											<% for (var j = 0; j < counter; j++) { %>
+												<tr>
+													<td><%= groups[i].freq %> <%= groups[i].info.iterations[j].iteration %> - $<%=  groups[i].info.iterations[j].amount %> - <%=  groups[i].info.iterations[j].winner %></td>
+													<td><%= groups[i].info.pendingWinners[j] %></td>
+												</tr>
+											<% } %>
+										</tbody>
+									</table>
+									<button class="ui button" data-val="<%= groups[i].groupId %>">View Group</button>
+					  			<% } else { %>
+									<div class="ui centered small header"> The cycle will start after everyone accepts the invitation. </div>
+									<table class="ui two column celled center aligned unstackable table">
+										<thead>
 											<tr>
-												<td><%= groups[i].status[j].name %></td>
-												<% if (groups[i].status[j].member) { %> 
-													<td class="positive">Joined</td>
-												<% } else { %>
-													<td class="negative">Pending</td>
-												<% } %>
+												<th>Name</th>
+												<th>Membership Status</th>
 											</tr>
-										<% } %>
-									</tbody>
-								</table>
-							<% } %>
+										</thead>
+										<tbody>
+											<% for ( var j = 0; j < groups[i].status.length; j++ ) { %>
+												<tr>
+													<td><%= groups[i].status[j].name %></td>
+													<% if (groups[i].status[j].member) { %> 
+														<td class="positive">Joined</td>
+													<% } else { %>
+														<td class="negative">Pending</td>
+													<% } %>
+												</tr>
+											<% } %>
+										</tbody>
+									</table>
+								<% } %>
+							</div>
+						<% } %>
+					<% } else { %>
+						<div class="ui massive header">
+							You're part of no groups, yet. Get started above.
 						</div>
 					<% } %>
 		  		</div>
